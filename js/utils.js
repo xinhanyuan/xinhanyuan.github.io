@@ -900,19 +900,19 @@ const anzhiyu = {
 
     document.getElementById("menu-mask").addEventListener("click", anMusicPageMenuAask);
 
-    // 监听增加单曲按钮
-    anMusicBtnGetSong.addEventListener("click", () => {
-      if (changeMusicListFlag) {
-        const anMusicPage = document.getElementById("anMusic-page");
-        const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
-        const allAudios = metingAplayer.list.audios;
-        const randomIndex = Math.floor(Math.random() * allAudios.length);
-        // 随机播放一首
-        metingAplayer.list.switch(randomIndex);
-      } else {
-        anzhiyu.cacheAndPlayMusic();
-      }
-    });
+    // // 监听增加单曲按钮
+    // anMusicBtnGetSong.addEventListener("click", () => {
+    //   if (changeMusicListFlag) {
+    //     const anMusicPage = document.getElementById("anMusic-page");
+    //     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
+    //     const allAudios = metingAplayer.list.audios;
+    //     const randomIndex = Math.floor(Math.random() * allAudios.length);
+    //     // 随机播放一首
+    //     metingAplayer.list.switch(randomIndex);
+    //   } else {
+    //     anzhiyu.cacheAndPlayMusic();
+    //   }
+    // });
     anMusicRefreshBtn.addEventListener("click", () => {
       localStorage.removeItem("musicData");
       anzhiyu.snackbarShow("已移除相关缓存歌曲");
@@ -960,8 +960,20 @@ const anzhiyu = {
       }
     });
   },
+  // 在 anzhiyu 对象里加一个内部时间戳（放哪都行，只要在 changeMusicList 能访问到）
+  _changeMusicListLastTs: 0,
+
   // 切换歌单
   changeMusicList: async function () {
+    // 连续点击最小时间阈值 1200ms
+    const now = Date.now();
+    if (now - (this._changeMusicListLastTs || 0) < 1200) {
+      // 可选：提示一下
+      // this.snackbarShow?.("操作太快啦，请稍后再试", false, 1200);
+      return;
+    }
+    this._changeMusicListLastTs = now;
+
     const anMusicPage = document.getElementById("anMusic-page");
     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
     const currentTime = new Date().getTime();
@@ -992,7 +1004,10 @@ const anzhiyu = {
 
     // 切换标志位
     changeMusicListFlag = !changeMusicListFlag;
+
+    this.snackbarShow(changeMusicListFlag ? "常驻歌单" : "实时歌单");
   },
+
   // 控制台音乐列表监听
   addEventListenerConsoleMusicList: function () {
     const navMusic = document.getElementById("nav-music");

@@ -1,0 +1,29 @@
+/* 隐藏“增加单首”按钮 */
+#anMusicBtnGetSong {
+  display: none !important;
+}
+
+/* 统一：按钮整体离右边的距离（数值越大越往左） */
+:root {
+  --music-btn-right-base: 56px; /* 你觉得太右就把这个加大：56/72/88... */
+  --music-btn-gap: 60px;        /* 两个按钮之间的间距，想更紧就调小 */
+  --music-btn-bottom: 110px;    /* 上下位置 */
+}
+
+/* 这俩按钮共用定位 */
+#anMusicRefreshBtn,
+#anMusicSwitching {
+  position: fixed !important;
+  bottom: var(--music-btn-bottom) !important;
+  z-index: 9999 !important;
+}
+
+/* 最右边那个 */
+#anMusicRefreshBtn {
+  right: var(--music-btn-right-base) !important;
+}
+
+/* 左边那个顶替过去 */
+#anMusicSwitching {
+  right: calc(var(--music-btn-right-base) + var(--music-btn-gap)) !important;
+}
