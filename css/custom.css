@@ -27,3 +27,11 @@
 #anMusicSwitching {
   right: calc(var(--music-btn-right-base) + var(--music-btn-gap)) !important;
 }
+
+/* 让 page-header 的背景图可见（解决蒙版遮挡） */
+#page-header::before,
+#page-header::after {
+  opacity: 0 !important;
+  background: transparent !important;
+}
+
