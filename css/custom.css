@@ -1,16 +1,16 @@
-/* 隐藏“增加单首”按钮 */
+/* 闅愯棌鈥滃鍔犲崟棣栤€濇寜閽?*/
 #anMusicBtnGetSong {
   display: none !important;
 }
 
-/* 统一：按钮整体离右边的距离（数值越大越往左） */
+/* 缁熶竴锛氭寜閽暣浣撶鍙宠竟鐨勮窛绂伙紙鏁板€艰秺澶ц秺寰€宸︼級 */
 :root {
-  --music-btn-right-base: 56px; /* 你觉得太右就把这个加大：56/72/88... */
-  --music-btn-gap: 60px;        /* 两个按钮之间的间距，想更紧就调小 */
-  --music-btn-bottom: 110px;    /* 上下位置 */
+  --music-btn-right-base: 56px;
+  --music-btn-gap: 60px;
+  --music-btn-bottom: 110px;
 }
 
-/* 这俩按钮共用定位 */
+/* 杩欎咯鎸夐挳鍏辩敤瀹氫綅 */
 #anMusicRefreshBtn,
 #anMusicSwitching {
   position: fixed !important;
@@ -18,20 +18,65 @@
   z-index: 9999 !important;
 }
 
-/* 最右边那个 */
+/* 鏈€鍙宠竟閭ｄ釜 */
 #anMusicRefreshBtn {
   right: var(--music-btn-right-base) !important;
 }
 
-/* 左边那个顶替过去 */
+/* 宸﹁竟閭ｄ釜椤舵浛杩囧幓 */
 #anMusicSwitching {
   right: calc(var(--music-btn-right-base) + var(--music-btn-gap)) !important;
 }
 
-/* 让 page-header 的背景图可见（解决蒙版遮挡） */
-#page-header::before,
-#page-header::after {
+/* music-comments 页头图使用浅色背景，单独调整蒙版和文字 */
+#page-header.music-comments-header::before,
+#page-header.music-comments-header::after {
   opacity: 0 !important;
   background: transparent !important;
 }
 
+#page-header.music-comments-header #site-title,
+#page-header.music-comments-header #nav #blog_name a,
+#page-header.music-comments-header #nav .mask-name-container a,
+#page-header.music-comments-header #nav #menus a,
+#page-header.music-comments-header #nav #nav-right .nav-button a,
+#page-header.music-comments-header #nav #nav-right #toggle-menu a {
+  color: var(--font-color) !important;
+  text-shadow: none !important;
+}
+
+#page-header.music-comments-header #nav #center-console + label i {
+  background: var(--font-color) !important;
+}
+
+#home_top #random-banner {
+  position: relative;
+  background-image: url('/image/top_banner.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+
+#home_top #random-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.78) 0, rgba(255, 255, 255, 0.48) 26%, rgba(255, 255, 255, 0.12) 52%, rgba(255, 255, 255, 0) 72%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.34) 38%, rgba(255, 255, 255, 0.12) 68%, rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#home_top #random-banner .banners-title,
+#home_top #random-banner #skills-tags-group-all {
+  position: relative;
+  z-index: 1;
+}
+
+#home_top #random-banner #random-hover {
+  position: absolute;
+  z-index: 2;
+}
