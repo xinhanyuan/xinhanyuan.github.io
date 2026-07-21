@@ -80,3 +80,80 @@
   position: absolute;
   z-index: 2;
 }
+
+.post-music-card {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  margin: 0 0 28px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--anzhiyu-main) 18%, transparent);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 34%),
+    linear-gradient(135deg, rgba(92, 128, 145, 0.18), rgba(18, 34, 44, 0.06)),
+    var(--card-bg);
+  box-shadow: 0 20px 40px rgba(20, 30, 40, 0.12);
+}
+
+.post-music-card__cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 18px 30px rgba(20, 30, 40, 0.18);
+}
+
+.post-music-card__body {
+  min-width: 0;
+}
+
+.post-music-card__eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--anzhiyu-main);
+}
+
+.post-music-card__title {
+  margin-bottom: 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--font-color);
+}
+
+.post-music-card__artist {
+  margin-bottom: 16px;
+  font-size: 0.98rem;
+  color: var(--font-color);
+  opacity: 0.72;
+}
+
+.post-music-card__player {
+  display: block;
+  width: 100%;
+  border-radius: 999px;
+  filter: saturate(1.05);
+}
+
+@media screen and (max-width: 768px) {
+  .post-music-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .post-music-card__cover {
+    max-width: 220px;
+  }
+
+  .post-music-card__title {
+    font-size: 1.3rem;
+  }
+}
